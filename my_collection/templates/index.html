@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="column">
+<h1>Collection</h1>
+<table class="ui stripped table">
+    <thead>
+        <th>Photo</th>
+        <th>Drawing</th>
+        <th>Transcription</th>
+        <th>Notes</th>
+    </thead>
+    <tbody>
+    {% for item in items %}
+    <tr>
+        <td>
+            <img src="{{item.photo.url}}" height="200px"/>
+        </td>
+        <td>
+            <img src="{{item.drawing.url}}" height="200px"/>
+        </td>
+        <td>
+            <img src="{{item.transcription.url}}" height="200px"/>
+        </td>
+        <td>
+            <div class="ui content">
+                <div class="ui header">{{ item.name }}</div>
+                {{ item.location }}
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}
