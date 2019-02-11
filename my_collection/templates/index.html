@@ -3,19 +3,21 @@
 {% block content %}
 
 <div class="column">
-<h1>Collection</h1>
+<div class="ui basic center aligned segment">
+    <h1 style="color:#928452; font-family:'Aubrey', cursive; font-size:50px">Collection</h1>
+</div>
 <table class="ui stripped table">
     <thead>
         <th>Photo</th>
         <th>Drawing</th>
         <th>Transcription</th>
-        <th>Notes</th>
+        <th>Name</th>
     </thead>
     <tbody>
     {% for item in items %}
     <tr>
         <td>
-            <img src="{{item.photo.url}}" height="200px"/>
+            <img src="{{item.photo.url}}" height="200px"/w>
         </td>
         <td>
             <img src="{{item.drawing.url}}" height="200px"/>
@@ -25,7 +27,7 @@
         </td>
         <td>
             <div class="ui content">
-                <div class="ui header">{{ item.name }}</div>
+                <div class="ui header"><a href="{%  url 'item_detail' item.id %}">{{ item.name }}</a></div>
                 {{ item.location }}
             </div>
         </td>

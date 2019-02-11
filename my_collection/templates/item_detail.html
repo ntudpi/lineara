@@ -1,7 +1,40 @@
-{{ item.name }}
-{{ item.location }}
-{{ item.material_type }}
-{{ item.description }}
-<img scr="{{item.photo.url}}"/>
-<img scr="{{item.drawing.url}}"/>
-<img scr="{{item.transcription.url}}"/>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="column">
+<div class="ui basic center aligned segment">
+    <h1 style="color:#928452; font-family:'Aubrey', cursive; font-size:50px">{{ item.name }}</h1>
+</div>
+<div class="ui grid">
+<img class="five wide column" src="{{item.photo.url}}" height="auto"/>
+<img class="five wide column" src="{{item.drawing.url}}" height="auto"/>
+<img class="five wide column" src="{{item.transcription.url}}" height="auto"/>
+</div>
+<div class="ui segments">
+    <div class="ui segment">
+        <h4>Location:</h4>
+        <div class="ui segments">
+            <div class="ui segment">
+                <p>{{ item.location }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+        <h4>Material type:</h4>
+        <div class="ui segments">
+            <div class="ui segment">
+                {{ item.material_type }}
+            </div>
+        </div>
+    </div>
+    <div class="ui segment">
+        <h4>Description:</h4>
+        <div class="ui segments">
+            <div class="ui segment">
+                <p>{{ item.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

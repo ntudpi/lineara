@@ -9,10 +9,16 @@
     <link href="https://fonts.googleapis.com/css?family=Aubrey" rel="stylesheet">
 </head>
 <body>
-    <div class="ui fixed menu">
-        <a href="/"><h1 style="color:#928452; font-family:'Aubrey', cursive; padding:10px">LINEAR A CORPUS</h1></a>
+    <div class="ui fixed primary menu">
+        <a href="/" class="fitted item" style="color:#928452; font-family:'Aubrey', cursive; font-size:26px; padding:5px">LINEAR A CORPUS</a>
+        <div class="right menu">
+            <a href="/admin" class="item">
+                <i class="sign out icon"></i>
+                Admin site
+            </a>
+        </div>
     </div>
-    <div class="ui one column grid container" style="padding-top:70px; width:723px; margin:auto; background:white; min-height: 100%">
+    <div class="ui one column grid container" style="padding-top:50px; width:723px; margin:auto; background:white; min-height: 100%">
     {% block content %}
     {% endblock %}
     </div>

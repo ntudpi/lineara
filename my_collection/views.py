@@ -12,5 +12,5 @@ def index(request):
 def detail(request, item_id):
     item =  get_object_or_404(Item, pk=item_id)
     return render(request, 'item_detail.html', {
-        'item': blog,
+        'item': item,
     })
