@@ -5,6 +5,7 @@ from my_collection.forms import ItemForm
 from .models import Item
 from django.http import HttpResponse
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     latest_item = Item.objects.all()
@@ -51,7 +52,7 @@ def search(request):
         return HttpResponse(404)
 
 
-
+@login_required(login_url='/account/')
 def create(request):
     if request.method == 'GET':
         form = ItemForm()
