@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import Http404
+
+from my_collection.forms import ItemForm
 from .models import Item
 from django.http import HttpResponse
 from django.db.models import Q
@@ -48,3 +50,32 @@ def search(request):
     else:
         return HttpResponse(404)
 
+
+
+def create(request):
+    if request.method == 'GET':
+        form = ItemForm()
+        return render(request, 'create.html', {'form': form})
+    else:
+        form = ItemForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(commit=True)
+            form = ItemForm()
+            context = {}
+            context['form'] = form
+            context['edit_status'] = "success"
+            return render(
+                request,
+                'create.html',
+                context
+            )
+        else:
+            context = {}
+            context['edit_status'] = "error"
+            context['msg'] = form.errors
+            context['form'] = form
+            return render(
+                request,
+                'create.html',
+                context
+            )

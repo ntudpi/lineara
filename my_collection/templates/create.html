@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="ui container middle aligned center aligned grid" style="margin-top:30px">
+        <div class="column" style="max-width: 450px">
+            <h2 class="ui image header">
+                Create new item
+            </h2>
+            {% if edit_status == "success" %}
+                <div class="ui success message">
+                    <div class="header">Form Completed</div>
+                    <p>Request successfully sent.</p>
+                </div>
+            {% elif edit_status == "error" %}
+                <div class="ui error message">
+                    <div class="header">Action Forbidden</div>
+                    <p>{{ msg }}</p>
+                </div>
+            {% endif %}
+            <form class="ui  form" method="post" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="ui stacked segment">
+                    {{ form.as_p }}
+                    <input class="ui fluid large submit button" type="submit" value="Create" />
+                </div>
+                <input type="hidden" name="next" value="/"></input>
+            </form>
+        </div>
+    </div>
+{% endblock %}
