@@ -5,6 +5,14 @@
 <div class="column">
 <div class="ui basic center aligned segment">
     <h1 style="color:#928452; font-family:'Aubrey', cursive; font-size:50px">Collection</h1>
+     <form action="{% url 'search' %}" method="get" acept-charset="utf-8">
+        <div class="ui icon input">
+            <i class="search icon"></i>
+            <input class="prompt" type="text" placeholder="Search" name="query">
+        </div>
+        <button class="ui button" style="background-color:#928452; color:white" type="submit">Submit</button>
+    </form>
+    <h4>{{ search_text }}</h4>
 </div>
 <table class="ui stripped table">
     <thead>
