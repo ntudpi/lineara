@@ -51,6 +51,33 @@ def search(request):
     else:
         return HttpResponse(404)
 
+def material_search(request):
+    if request.method == 'GET':
+        items = ""
+        text=""
+        query = request.GET.get('query')
+        if query:
+            items = Item.objects.filter(
+                Q(material_type__contains=query)
+            )
+            if items.count()==0:
+                text = "Cannot find result for '" + query + "'"
+            else:
+                text = "Search result for: '" + query + "'"
+            return render(request, 'index.html', {
+                'items': items,
+                'search_text': text,
+            })
+        else:
+            items = Item.objects.all()
+            text = "All items"
+            return render(request, 'index.html', {
+                'items': items,
+                'search_text': text,
+            })
+    else:
+        return HttpResponse(404)
+
 
 @login_required(login_url='/account/')
 def create(request):

@@ -10,7 +10,17 @@
             <i class="search icon"></i>
             <input class="prompt" type="text" placeholder="Search" name="query">
         </div>
-        <button class="ui button" style="background-color:#928452; color:white" type="submit">Submit</button>
+        <button class="ui button" style="background-color:#928452; color:white" type="submit">Search</button>
+    </form>
+    <br>
+    <form action="{% url 'material' %}" method="get" acept-charset="utf-8">
+      <select class="ui selection dropdown" name="query" style="width:202px">
+          <option value="">Material type</option>
+          <option value="ZA">ZA</option>
+          <option value="ZE">ZE</option>
+          <option value="WC">WC</option>
+        </select>
+            <button class="ui button" style="background-color:#928452; color:white; width:85px" type="submit">Filter</button>
     </form>
     <h4>{{ search_text }}</h4>
 </div>
