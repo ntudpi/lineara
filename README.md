@@ -13,7 +13,7 @@ Go into the project directory where the file `manage.py` resides
 
 Run the command `python3 manage.py runserver` and you will be able to access the website from `localhost:8000` using your browser
 
-## How it works
+## How it works in a nutshell
 Some important components in a Django project are: `app`, `project app`, `manage.py`.
 
 ### `app` & `project app`
@@ -147,4 +147,4 @@ Another interesting part is the `extends` statement.
 ...
 {% end block %}
 ```
-This is very similar to an import or 
+This is very similar to an import or include statement. The `base.html` contains the base layout and all the javascript & css loading.
