@@ -79,5 +79,72 @@ urlpatterns = [
 	...
 ]
 ```
-The first urlpattern 
-In urlpattern we can have some kind of regex, as we can see in the example of `<int:item_id>/`. What it will do is that it will try to match the pattern (if it's an integer), then extract the integer and pass it as argument `item_id` to the view `detail`.
+The first urlpattern routes to a view function `index`.
+In urlpatterns we can have some kind of regex, as we can see in the example of `<int:item_id>/`. What it will do is that it will try to match the pattern (if it's an integer), then extract the integer and pass it as argument `item_id` to the view function `detail`.
+
+#### `views.py`
+`views.py` is the most 'active' part of a django app. It is the connector between `urls.py` with `forms.py` or `models.py`, doing certain operations and also integrating with `HTML` files rendering.
+```python
+def index(request):
+	latest_item = Item.objects.all()
+	return render(request, 'index.html', {
+	'items':latest_item,
+})
+
+def detail(request, item_id):
+	item = get_object_or_404(Item, pk=item_id)
+	return render(request, 'item_detail.html', {
+	'item': item,
+})
+```
+In the first view function, `index`, first it just queries all `Item`s from the database, and render it to the template of `index.html` and pass the data in the dictionary `{'items': latest_item,}`.
+
+The second view function, `detail`, instead of giving all the `Item` objects, it just go to a specific `Item` based on it's `item_id` and render it with `item_detail.html`.
+
+#### `templates/`
+
+It is the directory where all the static files such as `HTML`, `CSS` and `JavaScript` resides. Let's look at the interesting part of `index.html`.
+``` html
+{% for item in items %}
+<tr>
+	<td>
+		<img src="{{item.photo.url}}" height="200px"/w>
+	</td>
+	<td>
+		<img src="{{item.drawing.url}}" height="200px"/>
+	</td>
+	<td>
+		<img src="{{item.transcription.url}}" height="200px"/>
+	</td>
+	<td>
+		<div class="ui content">
+			<div class="ui header"><a href="{% url 'item_detail' item.id %}">{{ item.name }}</a></div>
+		{{ item.location }}
+	</div>
+	</td>
+</tr>
+{% endfor %}
+```
+You may notice that `{% ... %}` and `{{ ... }}` syntax which may look strange to an `HTML` file. It's the Django Template syntax. Django is not a pure backend framework. It's more like a fullstack which focuses in backend but still provide light weight front-end framework.
+
+In the fancy brackets `{% ... %}` we may pass some Django Template statements. In the example above it's very similar to django for loop, with the exception of indentation and the need to put the `endfor` statement. The other one, `{{ ... }}` is for expressions. 
+
+The variable `items` (an array) is passed through a context when a view is rendering the html. As you may recall:
+``` py
+def index(request):
+	latest_item = Item.objects.all()
+	return render(request, 'index.html', {
+	'items':latest_item,
+})
+```
+The `'items'` is passed to the html and rendered by django statement.
+
+Another interesting part is the `extends` statement.
+``` py
+{% extends 'base.html' %}
+
+{% block content %}
+...
+{% end block %}
+```
+This is very similar to an import or 
